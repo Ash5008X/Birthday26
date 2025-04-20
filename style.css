@@ -1,0 +1,248 @@
+*{
+    border: 0px;
+    padding: 0px;
+}
+@font-face {
+    font-family: Cursive-head;
+    src: url(fonts/Niconne-Regular.ttf);
+}
+@font-face {
+    font-family: Puppy_cursive;
+    src: url(fonts/PuppiesPlay-Regular.ttf);
+}
+@font-face {
+    font-family: CherryBombOne-Regular;
+    src: url(fonts/CherryBombOne-Regular.ttf);
+}
+body{
+    background-image: url(media/bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.gifs{
+    position: fixed;
+    margin-top: 3%;
+    width: 65em;
+    height: 50em;
+    margin-left: 30px;
+}
+.gif{
+    margin: 0px;
+    padding: 0px;
+}
+#two{
+    position: relative;
+    bottom: 60%;
+    left: 35%;
+}
+.main{
+    background-color: white;
+    opacity: 90%;
+    width: 65em;
+    height: 50em;
+    position: fixed;
+    top: 5%;
+    left: 20%;
+    border-radius: 0px 125px 0px 125px;
+}
+.hb1{
+    font-family: Cursive-head;
+    font-size: 4.5em;
+    position: relative;
+    left: 30%;
+    top: 2%;
+    margin: 0px;
+    padding: 0px;
+}
+.hb2{
+    font-family: Cursive-head;
+    font-size: 4.5em;
+    position: relative;
+    left: 40%;
+    top: 2%;
+    margin: 0px;
+    padding: 0px;
+}
+.text{
+    position: relative;
+    padding: 5px 0px 30px 30px;
+    font-family: Puppy_cursive;
+    font-size: 3em;
+}
+.gif{
+    position: fixed;
+    top: 45%;
+    left: 42%;
+}
+.surprise{
+    position: relative;
+    top: 35%;
+    left: 39%;
+    width: 250px;
+    height: 50px;
+    background-color: rgb(255, 0, 65);
+    color: white;
+    border-radius: 50px;
+    font-family: CherryBombOne-Regular;
+    font-size: 2em;
+}
+heart-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+.heart {
+    position: absolute;
+    color: lightpink;
+    font-size: 2em;
+    opacity: 0;
+    animation: floatAround 1s ease-out forwards;
+}
+
+@keyframes floatAround {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--float-x), var(--float-y)) scale(1.4);
+        opacity: 0;
+    }
+}
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(media/loading-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-screen.active {
+    display: flex;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.loader-text {
+    font-size: 1.8em;
+    color: rgb(255, 0, 65);
+    white-space: nowrap;
+    border-right: 2px solid rgb(255, 0, 65);
+    overflow: hidden;
+    width: 0;
+    margin-bottom: 20px;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 300px; } /* Adjust this to fit your full text */
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: rgb(255, 0, 65); }
+}
+
+.loader-text.typing {
+    animation: typing 2s steps(25, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Video styles */
+#loader-video {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* === Responsive Mobile View === */
+@media screen and (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-attachment: scroll;
+    }
+
+    .main1,
+    .main2,
+    .main {
+        position: static;
+        width: 90%;
+        height: auto;
+        margin: 20px auto;
+        border-radius: 30px;
+    }
+
+    .main2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        left: auto;
+        top: auto;
+    }
+
+    h1 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.2em;
+        padding: 0 10px;
+    }
+
+    img {
+        width: 90%;
+        height: auto;
+        border-radius: 30px;
+    }
+
+    .heart,
+    .heart-top-left,
+    .heart-bottom-right,
+    .heart-top-right,
+    .heart-bottom-left {
+        display: none; /* Optional: Hide on mobile for simplicity */
+    }
+
+    .text, .hb1, .hb2, #click-text {
+        font-size: 2em !important;
+        text-align: center;
+        left: 0 !important;
+        top: auto !important;
+    }
+
+    .surprise {
+        width: 80%;
+        left: 10%;
+        top: auto;
+        font-size: 1.5em;
+    }
+
+    .gifs, .gif {
+        width: 90%;
+        height: auto;
+        margin: 10px auto;
+        position: static;
+    }
+}

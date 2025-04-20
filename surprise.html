@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>April-26-Surprise</title>
+  <link rel="stylesheet" href="surprise.css"/>
+  <link rel="shortcut icon" href="media/heart_icon-icons.com_54429.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="main">
+    <p id="click-text">Click on cake to cut it</p>
+  </div>
+
+  <!-- 🎈 Balloons container should be outside the cake div -->
+  <div id="balloon-container"></div>
+
+  <!-- 🎂 Cake Scene -->
+  <div class="cake-scene">
+    <div class="cake" id="cake">
+      <div class="cake" id="cake">
+        <div class="left-half">
+          <div class="layer chocolate"></div>
+          <div class="layer cream"></div>
+          <div class="layer chocolate"></div>
+        </div>
+        <div class="right-half">
+          <div class="layer chocolate"></div>
+          <div class="layer cream"></div>
+          <div class="layer chocolate"></div>
+        </div>
+
+      <!-- Candles -->
+      <div class="candle1"><div class="flame1"></div></div>
+      <div class="candle2"><div class="flame2"></div><div class="number">20</div></div>
+      <div class="candle3"><div class="flame3"></div></div>
+    </div>
+  </div>
+
+  <!-- 🎉 Modal -->
+  <div id="congrats-modal">
+    <div class="modal-content">
+      <h2 id="typed-text"></h2>
+      <button onclick="showGift()">Click here for your gift</button>
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    function getRandomColor() {
+      const colors = ['#FF69B4', '#FFD700', '#00FFFF', '#ADFF2F', '#FF4500', '#FFB6C1'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function createBalloons(count = 120) {
+      const container = document.getElementById('balloon-container');
+
+      for (let i = 0; i < count; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.backgroundColor = getRandomColor();
+
+        const duration = 3 + Math.random() * 5;
+        const delay = Math.random() * 10;
+
+        balloon.style.animationDuration = `${duration}s`;
+        balloon.style.animationDelay = `${delay}s`;
+
+        container.appendChild(balloon);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const cake = document.getElementById('cake');
+      const clickText = document.getElementById('click-text');
+      const cakeScene = document.querySelector('.cake-scene');
+
+      setTimeout(() => {
+        cakeScene.style.display = 'block';
+        clickText.style.display = 'block';
+      }, 1000);
+
+      cake.addEventListener('click', () => {
+        clickText.style.display = 'none';
+
+        createBalloons(120);
+
+        setInterval(() => {
+          createBalloons(20);
+        }, 3000);
+
+        setTimeout(() => {
+        document.getElementById('congrats-modal').style.display = 'flex';
+        typeText("🎉 Congratulations on turning 20!");
+        }, 2500);
+
+        // Typing effect function
+        function typeText(text) {
+          const element = document.getElementById("typed-text");
+          let i = 0;
+          element.innerHTML = "";
+          const typing = setInterval(() => {
+            element.innerHTML += text.charAt(i);
+            i++;
+            if (i >= text.length) clearInterval(typing);
+            }, 80); // speed of typing
+        }
+
+      });
+    });
+
+    const cake = document.getElementById('cake');
+    cake.addEventListener('click', () => {
+    cake.classList.add('split');
+    });
+
+
+    function showGift() {
+      window.location.href = 'gift.html'; // change this to actual gift page URL
+    }
+  </script>
+</body>
+</html>
