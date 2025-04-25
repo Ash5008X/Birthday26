@@ -36,5 +36,20 @@
         
     <div class="heart heart-top-right"></div>
     <div class="heart heart-bottom-left"></div>
+    <audio id="bg-music" autoplay loop>
+        <source src="media/WhatsApp Audio 2025-04-25 at 11.23.25 PM.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+    
+      
+      <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const audio = document.getElementById('bg-music');
+          audio.volume = 0.3; // 30% volume
+          audio.play().catch(e => {
+            console.log("Autoplay was prevented:", e);
+          });
+        });
+      </script>
 </body>
 </html>
