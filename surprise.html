@@ -12,23 +12,22 @@
     <p id="click-text">Click on cake to cut it</p>
   </div>
 
-  <!-- 🎈 Balloons container should be outside the cake div -->
+  <!-- 🎈 Balloons container -->
   <div id="balloon-container"></div>
 
   <!-- 🎂 Cake Scene -->
   <div class="cake-scene">
     <div class="cake" id="cake">
-      <div class="cake" id="cake">
-        <div class="left-half">
-          <div class="layer chocolate"></div>
-          <div class="layer cream"></div>
-          <div class="layer chocolate"></div>
-        </div>
-        <div class="right-half">
-          <div class="layer chocolate"></div>
-          <div class="layer cream"></div>
-          <div class="layer chocolate"></div>
-        </div>
+      <div class="left-half">
+        <div class="layer chocolate"></div>
+        <div class="layer cream"></div>
+        <div class="layer chocolate"></div>
+      </div>
+      <div class="right-half">
+        <div class="layer chocolate"></div>
+        <div class="layer cream"></div>
+        <div class="layer chocolate"></div>
+      </div>
 
       <!-- Candles -->
       <div class="candle1"><div class="flame1"></div></div>
@@ -44,6 +43,12 @@
       <button onclick="showGift()">Click here for your gift</button>
     </div>
   </div>
+
+  <!-- 🔊 Audio for popup message -->
+  <audio id="congrats-audio" loop>
+    <source src="media/ReelAudio-70311.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- ✅ JavaScript -->
   <script>
@@ -85,14 +90,20 @@
         clickText.style.display = 'none';
 
         createBalloons(120);
-
         setInterval(() => {
           createBalloons(20);
         }, 3000);
 
         setTimeout(() => {
-        document.getElementById('congrats-modal').style.display = 'flex';
-        typeText("🎉 Congratulations on turning 20!");
+          document.getElementById('congrats-modal').style.display = 'flex';
+          typeText("🎉 Congratulations on turning 20!");
+
+          // Play the congrats audio at 30% volume
+          const congratsAudio = document.getElementById('congrats-audio');
+          congratsAudio.volume = 0.3;
+          congratsAudio.play().catch(e => {
+            console.log("Autoplay was prevented:", e);
+          });
         }, 2500);
 
         // Typing effect function
@@ -104,20 +115,18 @@
             element.innerHTML += text.charAt(i);
             i++;
             if (i >= text.length) clearInterval(typing);
-            }, 80); // speed of typing
+          }, 80);
         }
+      });
 
+      // Optional animation class on cake
+      cake.addEventListener('click', () => {
+        cake.classList.add('split');
       });
     });
 
-    const cake = document.getElementById('cake');
-    cake.addEventListener('click', () => {
-    cake.classList.add('split');
-    });
-
-
     function showGift() {
-      window.location.href = 'gift.html'; // change this to actual gift page URL
+      window.location.href = 'gift.html';
     }
   </script>
 </body>
