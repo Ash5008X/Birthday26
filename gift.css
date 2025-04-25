@@ -1,65 +1,77 @@
-*{
-    border: 0px;
-    padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 @font-face {
     font-family: CherryBomb;
     src: url(fonts/CherryBombOne-Regular.ttf);
 }
-body{
+body {
     background-image: url(media/bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-}
-.main1 {
-    background-color: white;
-    margin-left: 20px;
-    opacity: 90%;
-    width: 65em;
-    height: 50em;
-    position: fixed;
-    top: 5%;
-    border-radius: 0px 125px 0px 125px;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;     
-    justify-content: flex-start;    
-}
-h1{
-    font-family: CherryBomb;
-    font-size: 3em;
-    color: #b8005c;
-}
-p {
-    font-family: 'CherryBomb', cursive;
-    font-size: 1.5em;
-    color: #ff007f;
-    text-align: center;
-    margin-top: 20px;
-    padding: 0 30px;
-    line-height: 1.6;
+    overflow: hidden;
 }
 
-.main2{
+.main1 {
     background-color: white;
-    width: 35em;
-    height: 50em;
-    position: fixed;
-    top: 5%;
-    left: 65%;
+    opacity: 0.9;
+    width: 58%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    border-radius: 0px 125px 0px 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.main1 h1 {
+    font-family: CherryBomb;
+    font-size: 3.5rem;
+    color: #b8005c;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.main1 p {
+    font-family: 'CherryBomb', cursive ;
+    font-size: 1.3rem;
+    color: #ff007f;
+    line-height: 1.5;
+    text-align: center;
+    padding: 0 20px;
+    margin: 0px 20px;
+}
+
+.main2 {
+    background-color: white;
+    opacity: 0.9;
+    width: 30%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    right: 5%;
     border-radius: 125px 0px 125px 0px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
-img{
-    width: 30em;
-    height: 45em;
-    position: relative;
-    border-radius: 120px 0px 120px 0px;
+
+.main2 img {
+    width: 90%;
+    height: 90%;
+    border-radius: 30px;
+    border-radius: 125px 0px 125px 0px;
 }
+
 .heart {
     width: 50px;
     height: 50px;
@@ -91,183 +103,30 @@ img{
 }
 
 .heart-top-left {
-    --tilt: -60deg;
-    top: calc(5% + 8px);
-    left: 35px;
-    transform: rotate(var(--tilt));
+    top: 10px;
+    left: 10px;
+}
+
+.heart-top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.heart-bottom-left {
+    bottom: 10px;
+    left: 10px;
 }
 
 .heart-bottom-right {
-    --tilt: -30deg;
-    bottom: 20px;
-    left: calc(65em - 40px);
-    transform: rotate(var(--tilt));
+    bottom: 10px;
+    right: 10px;
 }
+
 @keyframes beat {
     0%, 100% {
-        transform: scale(1) rotate(var(--tilt, -45deg));
+        transform: scale(1) rotate(-45deg);
     }
     50% {
-        transform: scale(1.2) rotate(var(--tilt, -45deg));
-    }
-}
-/* Reuse base heart style */
-.heart {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    background-color: red;
-    transform: rotate(var(--tilt, -45deg));
-    animation: beat 1s infinite;
-    z-index: 2;
-}
-
-.heart::before,
-.heart::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    position: absolute;
-    border-radius: 50%;
-}
-
-.heart::before {
-    top: -50%;
-    left: 0;
-}
-
-.heart::after {
-    left: 50%;
-    top: 0;
-}
-
-/* Smaller hearts for main2 */
-.heart-top-right,
-.heart-bottom-left {
-    width: 35px;
-    height: 35px;
-}
-
-.heart-top-right::before,
-.heart-top-right::after,
-.heart-bottom-left::before,
-.heart-bottom-left::after {
-    width: 35px;
-    height: 35px;
-}
-
-/* Top-right heart (on top point of main2) */
-.heart-top-right {
-    --tilt: -10deg;
-    top: calc(5% + 0px); /* small offset from main2 top */
-    left: calc(65% + 34em - 30px); /* near top-right point of .main2 */
-}
-
-/* Bottom-left heart (on bottom point of main2) */
-.heart-bottom-left {
-    --tilt: -90deg;
-    bottom: 35px;
-    left: calc(65% + 5px); /* near bottom-left point of .main2 */
-}
-
-
-@media screen and (max-width: 768px) {
-    body {
-        background-size: cover;
-        background-attachment: scroll;
-    }
-
-    .main1,
-    .main2,
-    .main {
-        position: static;
-        width: 90%;
-        height: auto;
-        margin: 20px auto;
-        border-radius: 30px;
-    }
-
-    .main2 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        left: auto;
-        top: auto;
-    }
-
-    h1 {
-        font-size: 2em;
-        text-align: center;
-    }
-
-    p {
-        font-size: 1.2em;
-        padding: 0 10px;
-    }
-
-    img {
-        width: 90%;
-        height: auto;
-        border-radius: 30px;
-    }
-
-    /* Resize and reposition hearts for mobile */
-    .heart,
-    .heart::before,
-    .heart::after {
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-    .heart::before {
-        top: -50%;
-        left: 0;
-    }
-
-    .heart::after {
-        left: 50%;
-        top: 0;
-    }
-
-    .heart-top-left {
-        top: 10px;
-        left: 10px;
-    }
-
-    .heart-bottom-right {
-        bottom: 10px;
-        left: calc(100% - 40px);
-    }
-
-    .heart-top-right {
-        top: 10px;
-        left: calc(100% - 40px);
-    }
-
-    .heart-bottom-left {
-        bottom: 10px;
-        left: 10px;
-    }
-
-    .text, .hb1, .hb2, #click-text {
-        font-size: 2em !important;
-        text-align: center;
-        left: 0 !important;
-        top: auto !important;
-    }
-
-    .surprise {
-        width: 80%;
-        left: 10%;
-        top: auto;
-        font-size: 1.5em;
-    }
-
-    .gifs, .gif {
-        width: 90%;
-        height: auto;
-        margin: 10px auto;
-        position: static;
+        transform: scale(1.2) rotate(-45deg);
     }
 }

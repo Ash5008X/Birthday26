@@ -1,7 +1,9 @@
-*{
+* {
     border: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
+
 @font-face {
     font-family: Cursive-head;
     src: url(fonts/Niconne-Regular.ttf);
@@ -14,72 +16,71 @@
     font-family: CherryBombOne-Regular;
     src: url(fonts/CherryBombOne-Regular.ttf);
 }
-body{
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
     background-image: url(media/bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
 }
-.gifs{
-    position: fixed;
-    margin-top: 3%;
-    width: 65em;
-    height: 50em;
-    margin-left: 30px;
-}
-.gif{
-    margin: 0px;
-    padding: 0px;
-}
-#two{
-    position: relative;
-    bottom: 60%;
-    left: 35%;
-}
-.main{
+
+.main {
     background-color: white;
-    opacity: 90%;
-    width: 65em;
-    height: 50em;
-    position: fixed;
-    top: 5%;
-    left: 20%;
+    opacity: 0.9;
+    width: 1000px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 0px 125px 0px 125px;
 }
-.hb1{
-    font-family: Cursive-head;
-    font-size: 4.5em;
+
+.gifs {
     position: relative;
-    left: 30%;
-    top: 2%;
-    margin: 0px;
-    padding: 0px;
+    width: 200px;
+    height: auto;
+    margin: 60px auto 20px auto;
+    display: flex;
+    justify-content: center;
+    left: 50%;
 }
-.hb2{
-    font-family: Cursive-head;
-    font-size: 4.5em;
+
+.gif {
     position: relative;
-    left: 40%;
-    top: 2%;
-    margin: 0px;
-    padding: 0px;
+    width: 200px;
+    height: 200px;
+    margin: 60px auto 20px auto;
+    display: flex;
+    bottom: 10%;
 }
-.text{
-    position: relative;
-    padding: 5px 0px 30px 30px;
+
+.hb1, .hb2 {
+    font-family: Cursive-head;
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text {
     font-family: Puppy_cursive;
-    font-size: 3em;
+    font-size: 2.2em;
+    text-align: center;
+    margin-top: 30px;
 }
-.gif{
-    position: fixed;
-    top: 45%;
-    left: 42%;
-}
-.surprise{
-    position: relative;
-    top: 35%;
-    left: 39%;
+
+.surprise {
+    display: block;
+    margin: 30px auto 0 auto;
     width: 250px;
     height: 50px;
     background-color: rgb(255, 0, 65);
@@ -87,162 +88,103 @@ body{
     border-radius: 50px;
     font-family: CherryBombOne-Regular;
     font-size: 2em;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
 }
-heart-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-}
-
 .heart {
-    position: absolute;
-    color: lightpink;
-    font-size: 2em;
-    opacity: 0;
-    animation: floatAround 1s ease-out forwards;
+    position: fixed;
+    font-size: 1.8em;
+    animation: floatUp 1.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 9999;
 }
 
-@keyframes floatAround {
+@keyframes floatUp {
     0% {
-        transform: translate(0, 0) scale(1);
         opacity: 1;
+        transform: translate(0, 0);
     }
     100% {
-        transform: translate(var(--float-x), var(--float-y)) scale(1.4);
         opacity: 0;
+        transform: translate(var(--float-x), var(--float-y));
     }
 }
+
+/* Loader & Heart animations remain unchanged */
+
 #loading-screen {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0; /* shortcut for top: 0; left: 0; right: 0; bottom: 0 */
     width: 100%;
     height: 100%;
     background-image: url(media/loading-bg.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 9999;
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    overflow: hidden; /* ensures inner content doesn’t cause scroll */
+}
+#loading-screen.active {
+    display: flex;
+    opacity: 1;
 }
 
 #loading-screen.active {
     display: flex;
+    opacity: 1;
 }
 
 .loader-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
 }
-
+.loader-content video {
+    width: 300px;
+    height: auto;
+    max-width: 80%;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 65, 0.6);
+}
 .loader-text {
     font-size: 1.8em;
     color: rgb(255, 0, 65);
     white-space: nowrap;
     border-right: 2px solid rgb(255, 0, 65);
     overflow: hidden;
-    width: 0;
+    width: 300px; /* 👈 Fix width here */
+    max-width: 90%;
     margin-bottom: 20px;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 300px; } /* Adjust this to fit your full text */
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: rgb(255, 0, 65); }
+    text-align: center;
 }
 
 .loader-text.typing {
     animation: typing 2s steps(25, end) forwards, blink-caret 0.75s step-end infinite;
 }
-
-/* Video styles */
-#loader-video {
-    width: 200px; /* Adjust size as needed */
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+#loading-screen {
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-/* === Responsive Mobile View === */
-@media screen and (max-width: 768px) {
-    body {
-        background-size: cover;
-        background-attachment: scroll;
-    }
+#loading-screen.active {
+    display: flex;
+    opacity: 1;
+}
 
-    .main1,
-    .main2,
-    .main {
-        position: static;
-        width: 90%;
-        height: auto;
-        margin: 20px auto;
-        border-radius: 30px;
-    }
+@keyframes typing {
+    from { width: 0; }
+    to { width: 300px; }
+}
 
-    .main2 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        left: auto;
-        top: auto;
-    }
-
-    h1 {
-        font-size: 2em;
-        text-align: center;
-    }
-
-    p {
-        font-size: 1.2em;
-        padding: 0 10px;
-    }
-
-    img {
-        width: 90%;
-        height: auto;
-        border-radius: 30px;
-    }
-
-    .heart,
-    .heart-top-left,
-    .heart-bottom-right,
-    .heart-top-right,
-    .heart-bottom-left {
-        display: none; /* Optional: Hide on mobile for simplicity */
-    }
-
-    .text, .hb1, .hb2, #click-text {
-        font-size: 2em !important;
-        text-align: center;
-        left: 0 !important;
-        top: auto !important;
-    }
-
-    .surprise {
-        width: 80%;
-        left: 10%;
-        top: auto;
-        font-size: 1.5em;
-    }
-
-    .gifs, .gif {
-        width: 90%;
-        height: auto;
-        margin: 10px auto;
-        position: static;
-    }
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: rgb(255, 0, 65); }
 }

@@ -22,64 +22,69 @@
                 <div class="heart-container"></div>
 
                 
-                <div id="loading-screen">
-                    <div class="loader-content">
-                        <div class="loader-text" id="typed-text"></div>
-                        <video id="loader-video" autoplay muted loop playsinline>
-                            <source src="media/loading - Made with Clipchamp.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+                
                 <div class="gif"><img src="media/4.gif" alt="hearts"></div>
         </div>
+        <div id="loading-screen">
+          <div class="loader-content">
+              <div class="loader-text" id="typed-text"></div>
+              <video id="loader-video" autoplay muted loop playsinline>
+                  <source src="media/loading - Made with Clipchamp.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+          </div>
+      </div>
         
-               <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-  const button = document.querySelector('.surprise');
-  const container = document.querySelector('.heart-container');
-  const loader = document.getElementById('loading-screen');
-
-  button.addEventListener('click', () => {
-    // Heart Animation
-    const buttonRect = button.getBoundingClientRect();
-    for (let i = 0; i < 50; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '💖';
-
-      const offsetX = Math.random() * 120 - 60;
-      const offsetY = Math.random() * 60 - 30;
-      heart.style.left = (button.offsetLeft + button.offsetWidth / 2 + offsetX) + 'px';
-      heart.style.top = (button.offsetTop + offsetY) + 'px';
-
-      const floatX = Math.random() * 60 - 30;
-      const floatY = -100 - Math.random() * 50;
-      heart.style.setProperty('--float-x', floatX + 'px');
-      heart.style.setProperty('--float-y', floatY + 'px');
-
-      container.appendChild(heart);
-      setTimeout(() => heart.remove(), 1000);
-    }
-
-    // Show loading screen and start typing animation
-    setTimeout(() => {
-      loader.classList.add('active');  // Make the loading screen visible
-
-      // Trigger typing animation
-      const typed = document.getElementById('typed-text');
-      typed.textContent = 'Loading your surprise....';  // Set the text
-      typed.classList.add('typing');  // Add typing effect class
-
-      // Redirect after typing animation
-      setTimeout(() => {
-        window.location.href = 'surprise.html';  // Redirect to surprise page
-      }, 2200); // Wait for typing animation to finish (adjust the timing as needed)
-    }, 1000); // Allow hearts to float for 1 second before showing the loading screen
-  });
-});
-
-                      </script>
-                            
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            const button = document.querySelector('.surprise');
+            const loader = document.getElementById('loading-screen');
+          
+            button.addEventListener('click', () => {
+              const buttonRect = button.getBoundingClientRect();
+              const scrollTop = window.scrollY || document.documentElement.scrollTop;
+              const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+          
+              const centerX = scrollLeft + buttonRect.left + buttonRect.width / 2;
+              const centerY = scrollTop + buttonRect.top + buttonRect.height / 2;
+          
+              for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '💖';
+          
+                // Start at button center
+                heart.style.left = centerX + 'px';
+                heart.style.top = centerY + 'px';
+          
+                // Random directions
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 100 + Math.random() * 50; // 100–150 px
+                const floatX = Math.cos(angle) * distance;
+                const floatY = Math.sin(angle) * distance;
+          
+                heart.style.setProperty('--float-x', floatX + 'px');
+                heart.style.setProperty('--float-y', floatY + 'px');
+          
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1500);
+              }
+          
+              // Show loading screen and start typing animation
+              setTimeout(() => {
+                loader.classList.add('active');
+                const typed = document.getElementById('typed-text');
+                typed.textContent = 'Loading your surprise....';
+                typed.classList.add('typing');
+          
+                setTimeout(() => {
+                  window.location.href = 'surprise.html';
+                }, 2200);
+              }, 1000);
+            });
+          });
+          </script>
+          
+        
 </body>
 </html> 
